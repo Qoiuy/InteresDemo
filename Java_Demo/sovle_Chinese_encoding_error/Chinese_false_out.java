@@ -28,7 +28,7 @@ public class Chinese_false_out extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("字符流中文");
 		//解决字符流乱码的具体实现
-//		response.setCharacterEncoding("utf-8");
+//		response.setCharacterEncoding("text/html;charset=utf-8");
 //		response.setHeader("Content-Type", "text/html;charset=utf-8");
 		
 		//request 乱码一般指post和get方式提交的时候产生乱码
