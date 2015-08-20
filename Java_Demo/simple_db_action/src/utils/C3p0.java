@@ -11,14 +11,7 @@ import utils.MyJdbcUtils;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class C3p0 {
 	
-	/**
-	 * 正常使用c3p0
-	 */
-	public static ComboPooledDataSource getConnection()throws Exception{
-		
-		return new ComboPooledDataSource();
-		
-	}
+
 	
 	/**
 	 * 使用配置文件配置c3p0， 满足2个条件
