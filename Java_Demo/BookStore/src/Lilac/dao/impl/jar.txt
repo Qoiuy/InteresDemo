@@ -1,0 +1,4 @@
+//需要的jar包
+//c3p0-0.9.1.2.jar  c3p0
+//commons-dbutils-1.4.jar   数据库连接池数据的的获取
+//mysql-connector-java-5.0.8-bin.jar  数据库连接使用的包

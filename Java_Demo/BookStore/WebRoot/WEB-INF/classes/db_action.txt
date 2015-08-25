@@ -1,0 +1,9 @@
+create table register (
+	email varchar(20),
+	username varchar(50),
+	password varchar(50),
+	gender varchar(10),
+	telephone varchar(15),
+	introduce varchar(200) 
+);
+
