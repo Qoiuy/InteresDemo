@@ -8,13 +8,6 @@
 <title>bookStore注册页面</title>
 <%--导入css --%>
 <link rel="stylesheet" href="css/main.css" type="text/css" />
-<script type="text/javascript">
-	function changeImage() {
-
-		document.getElementById("img").src = "${pageContext.request.contextPath}/imageCode?time="
-				+ new Date().getTime();
-	}
-</script>
 </head>
 
 
@@ -26,7 +19,7 @@
 	<h2>${msg }</h2>
 	<div id="divcontent">
 		<form action="${pageContext.request.contextPath}/register"
-			method="post">
+			method="post"  onsubmit="return checkForm();">
 			<table width="850px" border="0" cellspacing="0">
 				<tr>
 					<td style="padding:30px">
@@ -34,49 +27,59 @@
 						
 						<table width="70%" border="0" cellspacing="2" class="upline">
 							<tr>
-								<td style="text-align:right; width:20%">会员邮箱：</td>
-								<td style="width:40%">
-								<input type="text" class="textinput"
-									name="email" /></td>
-								<td><font color="#999999">请输入有效的邮箱地址</font></td>
+								<td style="text-align:right;width:20%">会员邮箱</td>
+								<td><input type="text" name="mail" id="mail"
+									class="txtinput"></td>
+								<td><td><span id="mail_msg"></span></td>
 							</tr>
+
 							<tr>
-								<td style="text-align:right">会员名：</td>
-								<td>
-									<input type="text" class="textinput" name="username" />
+								<td style="text-align:right;">会员名</td>
+								<td><input type="text" name="username" id="username"
+									class="txtinput">
 								</td>
-								<td><font color="#999999">用户名设置至少6位</font></td>
-							</tr>
-							<tr>
-								<td style="text-align:right">密码：</td>
-								<td><input type="password" class="textinput"
-									name="password" /></td>
-								<td><font color="#999999">密码设置至少6位</font></td>
-							</tr>
-							<tr>
-								<td style="text-align:right">重复密码：</td>
-								<td><input type="password" class="textinput"
-									name="repassword" /></td>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td style="text-align:right">性别：</td>
-								<td colspan="2">&nbsp;&nbsp;<input type="radio"
-									name="gender" value="男" checked="checked" /> 男
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
-									name="gender" value="女" /> 女</td>
-							</tr>
-							<tr>
-								<td style="text-align:right">联系电话：</td>
-								<td colspan="2"><input type="text" class="textinput"
-									style="width:350px" name="telephone" /></td>
-							</tr>
-							<tr>
-								<td style="text-align:right">个人介绍：</td>
-								<td colspan="2"><textarea class="textarea" name="introduce"></textarea>
+								<td><span id="username_msg"></span>
 								</td>
 							</tr>
 
+							<tr>
+								<td style="text-align:right;">密码</td>
+								<td><input type="password" name="password" id="password"
+									class="txtinput"></td>
+								<td><span id="password_msg"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<td style="text-align:right;">重复密码</td>
+								<td><input type="password" id="repassword"
+									name="repassword" class="txtinput">
+								</td>
+								<td><span id="repassword_msg"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<td style="text-align:right;width:20%">性别</td>
+								<td colspan="2"><input type="radio" name="sex" value="男"
+									checked>男&nbsp;&nbsp;<input type="radio" name="sex"
+									value="女">女</td>
+
+							</tr>
+
+							<tr>
+								<td style="text-align:right;width:20%">联系电话</td>
+								<td colspan="2"><input type="text" name="phone"
+									class="txtinput" style="width:350px;">
+								</td>
+
+							</tr>
+
+							<tr>
+								<td style="text-align:right;width:20%">个人介绍</td>
+								<td colspan="2"><textarea name="descript" class="txtarea"></textarea>
+								</td>
+							</tr>
 						</table>
 
 
@@ -92,7 +95,7 @@
 							<tr>
 								<td style="text-align:right;width:20%;">&nbsp;</td>
 								<td colspan="2" style="width:50%"><img
-									src="${pageContext.request.contextPath}/imageCode" width="180"
+									src="${pageContext.request.contextPath}/code" width="180"
 									height="30" class="textinput" style="height:30px;" id="img" />&nbsp;&nbsp;
 									<a href="javascript:void(0);" onclick="changeImage()">看不清换一张</a>
 								</td>
@@ -133,4 +136,86 @@
 
 
 </body>
+
+<script type="text/javascript">
+
+	function changeImage() {
+		document.getElementById("img").src = "${pageContext.request.contextPath}/code?time="
+				+ new Date().getTime();
+	}
+
+	function checkForm() {
+		//在操作前，将xxx_msg中的信息清空
+		document.getElementById("mail_msg").innerHTML="";
+		document.getElementById("username_msg").innerHTML="";
+		document.getElementById("password_msg").innerHTML="";
+		document.getElementById("repassword_msg").innerHTML="";
+
+		//验证email不为空
+		var emailvalue = document.getElementById("mail").value;
+		if (checkNull(emailvalue)) {
+			document.getElementById("mail_msg").innerHTML = "<font color='#999999'>邮箱不能为空</iifont>";
+			return false;
+		}
+		//验证会员名
+		var usernamevalue = document.getElementById("username").value;
+		if (checkNull(usernamevalue)) {
+			document.getElementById("username_msg").innerHTML = "<font color='#999999'>会员名不能为空</font>";
+			return false;
+		}
+		//密码员名
+		var passwordvalue = document.getElementById("password").value;
+		if (checkNull(passwordvalue)) {
+			document.getElementById("password_msg").innerHTML = "<font color='#999999'>密码不能为空</font>";
+			return false;
+		}
+		//重复密码验证
+		var repasswordvalue = document.getElementById("repassword").value;
+		if (checkNull(repasswordvalue)) {
+			document.getElementById("repassword_msg").innerHTML = "<font color='#999999'>重复密码不能为空</font>";
+			return false;
+		}
+		//验证邮箱格式
+		if (!checkEmail(emailvalue)) {
+			document.getElementById("mail_msg").innerHTML = "<font color='#999999'>邮箱格式不正确</font>";
+			return false;
+		}
+		//验证长度
+		if(!checkLength(usernamevalue)){
+			document.getElementById("username_msg").innerHTML = "<font color='#999999'>会员名长度必须6位以上</font>";
+			return false;
+		}
+
+		if(!checkLength(passwordvalue)){
+			document.getElementById("password_msg").innerHTML = "<font color='#999999'>密码长度必须6位以上</font>";
+			return false;
+		}
+		//验证密码与重复密码一致
+		if(passwordvalue!=repasswordvalue){
+			document.getElementById("repassword_msg").innerHTML = "<font color='#999999'>两次密码输入不一致</font>";
+			return false;
+		}
+		return true;
+	};
+
+	//验证长度
+	function checkLength(value) {
+		var reg = /^(\w){6,}$/;
+		return reg.test(value);
+	}
+
+	//验证邮箱操作
+	function checkEmail(value) {
+		var reg = /^(\w)+@(\w)+(\.\w+)+$/;
+		return reg.test(value);
+	};
+
+	//提取一个非空校验的函数
+	function checkNull(value) {
+		//1.声明非空校验的正则
+		var reg = /^\s*$/; //0个或多个空白符
+		return reg.test(value);
+	};
+</script>
+
 </html>
