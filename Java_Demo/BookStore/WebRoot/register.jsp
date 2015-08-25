@@ -89,9 +89,9 @@
 						<table width="80%" border="0" cellspacing="2" class="upline">
 							<tr>
 								<td style="text-align:right; width:20%">输入校验码：</td>
-								<td style="width:50%"><input type="text" name="code" class="textinput" />
+								<td style="width:50%"><input type="text" name="code" class="textinput" id="codeid" onblur="ajax_code();"  />
 								</td>
-								<td>&nbsp;</td>
+								<td>&nbsp;<span id="ajax_code"></span></td>
 							</tr>
 							<tr>
 								<td style="text-align:right;width:20%;">&nbsp;</td>
@@ -139,7 +139,40 @@
 </body>
 
 <script type="text/javascript">
-
+	var code = document.getElementById("codeid").value;
+	//验证码异步验证
+	function ajax_code(){
+		var xmlhttp = createXmlHttpRequest();
+		xmlhttp.onreadystatechange=function() {
+			if(xmlhttp.readyState == 4) {
+				if(xmlhttp.status == 200) {
+					var data = xmlhttp.responseText;
+					var ajax_code = document.getElementById("ajax_code");
+					ajax_code.innerHTML = data;
+				}
+			}
+		};
+		xmlhttp.open("POST","${pageContext.request.contextPath}/ajaxRegister",true) ;
+		xmlhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("code="+code);
+	}
+	//ajax必备函数
+	function  createXmlHttpRequest(){
+		   var xmlHttp;
+		   try{    //Firefox, Opera 8.0+, Safari
+		           xmlHttp=new XMLHttpRequest();
+		    }catch (e){
+		           try{    //Internet Explorer
+		                  xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		            }catch (e){
+		                  try{
+		                          xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		                  }catch (e){}  
+		           }
+		    }
+		   return xmlHttp;
+		 }
+	//开不清换一张的实现
 	function changeImage() {
 		document.getElementById("img").src = "${pageContext.request.contextPath}/code?time="
 				+ new Date().getTime();
