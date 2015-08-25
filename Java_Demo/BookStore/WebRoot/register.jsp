@@ -83,8 +83,6 @@
 							</tr>
 						</table>
 
-
-
 						<h1>注册校验</h1>
 						<table width="80%" border="0" cellspacing="2" class="upline">
 							<tr>
@@ -102,8 +100,6 @@
 								</td>
 							</tr>
 						</table>
-
-
 
 						<table width="70%" border="0" cellspacing="0">
 							<tr>
@@ -148,19 +144,29 @@
 			if(xmlhttp.readyState == 4) {
 				if(xmlhttp.status == 200) {
 					var data = xmlhttp.responseText;
-					if(data != "true")
-						alert("false");
+					if(data != "true"){
+						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入错误</iifont>";
 						changeImage();
-					
-						
-				/* 	var ajax_code = document.getElementById("ajax_code");
-					ajax_code.innerHTML = data; */
+						return false;
+					}
+					else{
+						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入正确</iifont>";
+						return true;
+					}
 				}
 			}
 		};
 		xmlhttp.open("POST","${pageContext.request.contextPath}/ajaxRegister",true) ;
 		xmlhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("code="+code);
+	}
+	
+	//判断异步操作返回值
+	function linshi(){
+		if(data == "true")
+			alert("true");
+		else
+			alert("false");
 	}
 	//ajax必备函数
 	function  createXmlHttpRequest(){
