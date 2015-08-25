@@ -34,17 +34,28 @@ public class RegisterServlet extends HttpServlet {
 		 * 测试一下javabean
 		 * System.out.println(register.getEmail() +"·····"+ register.getGender() +"·····"+ register.getIntroduce() +"·····"+ register.getPassword() +"·····"+ register.getTelephone() +"·····"+ register.getUsername() );
 		 */
-		boolean bool = new RegisterService().addUser(register);
-		if(bool){
-			response.sendRedirect("/BookStore/registersuccess.jsp");
-		}
-		else{
-			request.setAttribute("msg", "用户名或密码错误");
+		
+		/**
+		 * 验证码的校验
+		 */
+		String Code_client = register.getCode();
+		String Code_service_session = (String) request.getSession().getAttribute("code");
+		if( ! Code_client.equalsIgnoreCase(Code_service_session)){
+			request.setAttribute("msg", "验证码错误");
 			request.getRequestDispatcher("/register.jsp").forward(request, response);
+		}else{
+			/**
+			 * 添加用户数据到数据库
+			 */
+			boolean bool = new RegisterService().addUser(register);
+			if(bool){
+				response.sendRedirect("/BookStore/registersuccess.jsp");
+			}
+			else{
+				request.setAttribute("msg", "用户名或密码错误");
+				request.getRequestDispatcher("/register.jsp").forward(request, response);
+			}
 		}
-		
-		
-		
 	}
 
 

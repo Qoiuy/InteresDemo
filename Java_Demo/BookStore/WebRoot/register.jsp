@@ -16,11 +16,12 @@
 	<%--导入头 --%>
 	<%@include file="menu_search.jsp"%><%--导入导航条与搜索 --%>
 
-	<h2>${msg }</h2>
+	
 	<div id="divcontent">
 		<form action="${pageContext.request.contextPath}/register"
 			method="post"  onsubmit="return checkForm();">
 			<table width="850px" border="0" cellspacing="0">
+				<h2>${msg }</h2>
 				<tr>
 					<td style="padding:30px">
 						<h1>新会员注册</h1>
@@ -88,7 +89,7 @@
 						<table width="80%" border="0" cellspacing="2" class="upline">
 							<tr>
 								<td style="text-align:right; width:20%">输入校验码：</td>
-								<td style="width:50%"><input type="text" class="textinput" />
+								<td style="width:50%"><input type="text" name="code" class="textinput" />
 								</td>
 								<td>&nbsp;</td>
 							</tr>

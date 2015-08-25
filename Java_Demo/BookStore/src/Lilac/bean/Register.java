@@ -7,6 +7,19 @@ public class Register {
 	private  String gender;
 	private  String telephone;
 	private  String introduce;
+	/**
+	 * 添加验证码 用来验证码
+	 */
+	
+	private String code;
+	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 	public Register() {
 		super();
 		// TODO Auto-generated constructor stub
