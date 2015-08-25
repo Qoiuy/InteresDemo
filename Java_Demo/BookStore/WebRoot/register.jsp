@@ -21,10 +21,12 @@
 		<form action="${pageContext.request.contextPath}/register"
 			method="post"  onsubmit="return checkForm();">
 			<table width="850px" border="0" cellspacing="0">
-				<h2>${msg }</h2>
+
 				<tr>
 					<td style="padding:30px">
 						<h1>新会员注册</h1>
+						
+						<input type='hidden' name='code_check_result' id='code_check_result' value="false">
 						
 						<table width="70%" border="0" cellspacing="2" class="upline">
 							<tr>
@@ -113,8 +115,6 @@
 		</form>
 	</div>
 
-
-
 	<div id="divfoot">
 		<table width="100%" border="0" cellspacing="0">
 			<tr>
@@ -130,12 +130,20 @@
 			</tr>
 		</table>
 	</div>
-
+	
 
 </body>
 
 <script type="text/javascript">
-
+	function linshi(){
+		var linshi = document.getElementById("ajax_check_code").value;
+		if(linshi == "true"){
+			document.getElementById("linshi").innerHTML = "<font color='#999999'>邮箱不能为空</iifont>";
+		}else{
+			document.getElementById("mail_msg").innerHTML = "<font color='#999999'>false</iifont>";
+		}
+	}
+	
 	//验证码异步验证
 	function ajax_code(){
 		var code = document.getElementById("codeid").value;
@@ -144,14 +152,18 @@
 			if(xmlhttp.readyState == 4) {
 				if(xmlhttp.status == 200) {
 					var data = xmlhttp.responseText;
-					if(data != "true"){
-						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入错误</iifont>";
-						changeImage();
-						return false;
+					if(data == "true"){
+						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入正确</iifont>";
+						var code_check_result = document.getElementById("code_check_result").value;
+						ajax_check_code="true";
 					}
 					else{
-						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入正确</iifont>";
-						return true;
+						
+						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入错误</iifont>";
+						var code_check_result = document.getElementById("code_check_result").value;
+						ajax_check_code="false";
+						changeImage();
+						
 					}
 				}
 			}
@@ -241,6 +253,12 @@
 			document.getElementById("repassword_msg").innerHTML = "<font color='#999999'>两次密码输入不一致</font>";
 			return false;
 		}
+		//验证验证码是否正确
+		if(document.getElementById("code_check_result").value!="true"){
+			alert("验证码输入错误~！");
+			return false;
+		}
+		
 		return true;
 	};
 
