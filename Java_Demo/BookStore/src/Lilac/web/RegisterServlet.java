@@ -24,6 +24,8 @@ public class RegisterServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;character=utf-8");
 		
+		System.out.println(request.getParameter("email"));
+		
 		Register register = new Register();
 		try {
 			BeanUtils.populate(register, request.getParameterMap());
@@ -36,26 +38,18 @@ public class RegisterServlet extends HttpServlet {
 		 */
 		
 		/**
-		 * 验证码的校验
+		 * 添加用户数据到数据库
 		 */
-		String Code_client = register.getCode();
-		String Code_service_session = (String) request.getSession().getAttribute("code");
-		if( ! Code_client.equalsIgnoreCase(Code_service_session)){
-			request.setAttribute("msg", "验证码错误");
-			request.getRequestDispatcher("/register.jsp").forward(request, response);
-		}else{
-			/**
-			 * 添加用户数据到数据库
-			 */
-			boolean bool = new RegisterService().addUser(register);
-			if(bool){
-				response.sendRedirect("/BookStore/registersuccess.jsp");
-			}
-			else{
-				request.setAttribute("msg", "用户名或密码错误");
-				request.getRequestDispatcher("/register.jsp").forward(request, response);
-			}
+		boolean bool = new RegisterService().addUser(register);
+		if(bool){
+			response.sendRedirect("/BookStore/registersuccess.jsp");
 		}
+		else{
+			request.setAttribute("msg", "用户名或密码错误");
+			request.getRequestDispatcher("/register.jsp").forward(request, response);
+		}
+			
+		
 	}
 
 

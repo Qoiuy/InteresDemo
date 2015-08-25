@@ -21,16 +21,15 @@
 		<form action="${pageContext.request.contextPath}/register"
 			method="post"  onsubmit="return checkForm();">
 			<table width="850px" border="0" cellspacing="0">
-
 				<tr>
 					<td style="padding:30px">
 						<h1>新会员注册</h1>
 						<table width="70%" border="0" cellspacing="2" class="upline">
 							<tr>
 								<td style="text-align:right;width:20%">会员邮箱</td>
-								<td><input type="text" name="mail" id="mail"
+								<td><input type="text" name="email" id="email"
 									class="txtinput"></td>
-								<td><td><span id="mail_msg"></span></td>
+								<td><td><span id="email_msg"></span></td>
 							</tr>
 
 							<tr>
@@ -61,14 +60,14 @@
 
 							<tr>
 								<td style="text-align:right;width:20%">性别</td>
-								<td colspan="2"><input type="radio" name="sex" value="男"
-									checked>男&nbsp;&nbsp;<input type="radio" name="sex"
+								<td colspan="2"><input type="radio" name="gender" value="男"
+									checked>男&nbsp;&nbsp;<input type="radio" name="gender"
 									value="女">女</td>
 							</tr>
 
 							<tr>
 								<td style="text-align:right;width:20%">联系电话</td>
-								<td colspan="2"><input type="text" name="phone"
+								<td colspan="2"><input type="text" name="telephone"
 									class="txtinput" style="width:350px;">
 								</td>
 
@@ -76,7 +75,7 @@
 
 							<tr>
 								<td style="text-align:right;width:20%">个人介绍</td>
-								<td colspan="2"><textarea name="descript" class="txtarea"></textarea>
+								<td colspan="2"><textarea name="introduce" class="txtarea"></textarea>
 								</td>
 							</tr>
 						</table>
@@ -181,15 +180,15 @@
 	//校验
 	function checkForm() {
 		//在操作前，将xxx_msg中的信息清空
-		document.getElementById("mail_msg").innerHTML="";
+		document.getElementById("email_msg").innerHTML="";
 		document.getElementById("username_msg").innerHTML="";
 		document.getElementById("password_msg").innerHTML="";
 		document.getElementById("repassword_msg").innerHTML="";
 
 		//验证email不为空
-		var emailvalue = document.getElementById("mail").value;
+		var emailvalue = document.getElementById("email").value;
 		if (checkNull(emailvalue)) {
-			document.getElementById("mail_msg").innerHTML = "<font color='#999999'>邮箱不能为空</iifont>";
+			document.getElementById("email_msg").innerHTML = "<font color='#999999'>邮箱不能为空</iifont>";
 			return false;
 		}
 		//验证会员名
@@ -212,7 +211,7 @@
 		}
 		//验证邮箱格式
 		if (!checkEmail(emailvalue)) {
-			document.getElementById("mail_msg").innerHTML = "<font color='#999999'>邮箱格式不正确</font>";
+			document.getElementById("email_msg").innerHTML = "<font color='#999999'>邮箱格式不正确</font>";
 			return false;
 		}
 		//验证长度
