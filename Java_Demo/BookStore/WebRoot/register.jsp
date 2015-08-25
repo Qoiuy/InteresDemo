@@ -25,9 +25,6 @@
 				<tr>
 					<td style="padding:30px">
 						<h1>新会员注册</h1>
-						
-						<input type='hidden' name='code_check_result' id='code_check_result' value="false">
-						
 						<table width="70%" border="0" cellspacing="2" class="upline">
 							<tr>
 								<td style="text-align:right;width:20%">会员邮箱</td>
@@ -67,7 +64,6 @@
 								<td colspan="2"><input type="radio" name="sex" value="男"
 									checked>男&nbsp;&nbsp;<input type="radio" name="sex"
 									value="女">女</td>
-
 							</tr>
 
 							<tr>
@@ -135,15 +131,8 @@
 </body>
 
 <script type="text/javascript">
-	function linshi(){
-		var linshi = document.getElementById("ajax_check_code").value;
-		if(linshi == "true"){
-			document.getElementById("linshi").innerHTML = "<font color='#999999'>邮箱不能为空</iifont>";
-		}else{
-			document.getElementById("mail_msg").innerHTML = "<font color='#999999'>false</iifont>";
-		}
-	}
-	
+	var checkCodeResult=null;
+		
 	//验证码异步验证
 	function ajax_code(){
 		var code = document.getElementById("codeid").value;
@@ -153,17 +142,13 @@
 				if(xmlhttp.status == 200) {
 					var data = xmlhttp.responseText;
 					if(data == "true"){
+						checkCodeResult = "true";
 						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入正确</iifont>";
-						var code_check_result = document.getElementById("code_check_result").value;
-						ajax_check_code="true";
 					}
 					else{
-						
+						checkCodeResult = "false";
 						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入错误</iifont>";
-						var code_check_result = document.getElementById("code_check_result").value;
-						ajax_check_code="false";
 						changeImage();
-						
 					}
 				}
 			}
@@ -171,14 +156,6 @@
 		xmlhttp.open("POST","${pageContext.request.contextPath}/ajaxRegister",true) ;
 		xmlhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("code="+code);
-	}
-	
-	//判断异步操作返回值
-	function linshi(){
-		if(data == "true")
-			alert("true");
-		else
-			alert("false");
 	}
 	//ajax必备函数
 	function  createXmlHttpRequest(){
@@ -201,7 +178,7 @@
 		document.getElementById("img").src = "${pageContext.request.contextPath}/code?time="
 				+ new Date().getTime();
 	}
-
+	//校验
 	function checkForm() {
 		//在操作前，将xxx_msg中的信息清空
 		document.getElementById("mail_msg").innerHTML="";
@@ -254,7 +231,7 @@
 			return false;
 		}
 		//验证验证码是否正确
-		if(document.getElementById("code_check_result").value!="true"){
+		if(checkCodeResult != "true"){
 			alert("验证码输入错误~！");
 			return false;
 		}

@@ -16,7 +16,6 @@ public class AjaxRegisterServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String Code_client = request.getParameter("code");
-		System.out.println(Code_client);
 		String Code_service_session = (String) request.getSession().getAttribute("code");
 		if( ! Code_client.equalsIgnoreCase(Code_service_session)){
 			response.getWriter().write("false");
