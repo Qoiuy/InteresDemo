@@ -20,7 +20,6 @@ public class AjaxRegisterServlet extends HttpServlet {
 		String Code_service_session = (String) request.getSession().getAttribute("code");
 		if( ! Code_client.equalsIgnoreCase(Code_service_session)){
 			response.getWriter().write("false");
-			//request.getRequestDispatcher("/register.jsp").forward(request, response);
 		}
 		else{
 			response.getWriter().write("true");

@@ -139,16 +139,22 @@
 </body>
 
 <script type="text/javascript">
-	var code = document.getElementById("codeid").value;
+
 	//验证码异步验证
 	function ajax_code(){
+		var code = document.getElementById("codeid").value;
 		var xmlhttp = createXmlHttpRequest();
 		xmlhttp.onreadystatechange=function() {
 			if(xmlhttp.readyState == 4) {
 				if(xmlhttp.status == 200) {
 					var data = xmlhttp.responseText;
-					var ajax_code = document.getElementById("ajax_code");
-					ajax_code.innerHTML = data;
+					if(data != "true")
+						alert("false");
+						changeImage();
+					
+						
+				/* 	var ajax_code = document.getElementById("ajax_code");
+					ajax_code.innerHTML = data; */
 				}
 			}
 		};
