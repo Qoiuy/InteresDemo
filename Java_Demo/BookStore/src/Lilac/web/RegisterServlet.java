@@ -21,11 +21,6 @@ public class RegisterServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;character=utf-8");
-		
-		System.out.println(request.getParameter("email"));
-		
 		Register register = new Register();
 		try {
 			BeanUtils.populate(register, request.getParameterMap());
