@@ -54,9 +54,9 @@
 																</tr>
 																<tr>
 																	<td colspan="2" style="text-align:center"><input
-																		type="checkbox" name="checkbox" value="checkbox" />
+																		type="checkbox" name="remember_user" value="user_auto" />
 																		记住用户名&nbsp;&nbsp; <input type="checkbox"
-																		name="checkbox" value="checkbox" /> 自动登录</td>
+																		name="remember_login" value="login_auto" /> 自动登录</td>
 																</tr>
 																<tr>
 																	<td colspan="2"
