@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class CodeServlet extends HttpServlet {
 
 	/**
-	 * 
+	 * 生成验证码
+	 * @author Lilac
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

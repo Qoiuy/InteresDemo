@@ -19,8 +19,15 @@
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>AjaxRegisterServlet</servlet-name>
-    <servlet-class>Lilac.web.AjaxRegisterServlet</servlet-class>
+    <servlet-class>Lilac.web.AjaxCheckRegisterServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ajaxCheckUserServlet</servlet-name>
+    <servlet-class>Lilac.web.AjaxCheckUserServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -35,6 +42,10 @@
   <servlet-mapping>
     <servlet-name>AjaxRegisterServlet</servlet-name>
     <url-pattern>/ajaxRegister</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ajaxCheckUserServlet</servlet-name>
+    <url-pattern>/ajaxUser</url-pattern>
   </servlet-mapping>
 
 </web-app>

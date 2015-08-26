@@ -35,7 +35,7 @@
 							<tr>
 								<td style="text-align:right;">会员名</td>
 								<td><input type="text" name="username" id="username"
-									class="txtinput">
+									class="txtinput" onblur="ajax_check_user();">
 								</td>
 								<td><span id="username_msg"></span>
 								</td>
@@ -84,7 +84,7 @@
 						<table width="80%" border="0" cellspacing="2" class="upline">
 							<tr>
 								<td style="text-align:right; width:20%">输入校验码：</td>
-								<td style="width:50%"><input type="text" name="code" class="textinput" id="codeid" onblur="ajax_code();"  />
+								<td style="width:50%"><input type="text" name="code" class="textinput" id="codeid" onblur="ajax_check_code();"  />
 								</td>
 								<td>&nbsp;<span id="ajax_code"></span></td>
 							</tr>
@@ -131,9 +131,33 @@
 
 <script type="text/javascript">
 	var checkCodeResult=null;
+	
+	//用户名的异步验证
+	//强哥做了用户名的异步校验  我想了想 为了用户的体验还是把用户的异步验证做了比较好~嘿嘿
+	function ajax_check_user(){
+		var check_user = document.getElementById("username").value;
+		var xmlhttp = createXmlHttpRequest();
+		xmlhttp.onreadystatechange=function() {
+			if(xmlhttp.readyState == 4) {
+				if(xmlhttp.status == 200) {
+					var data = xmlhttp.responseText;
+					if(data == "false"){
+						document.getElementById("username_msg").innerHTML = "<font color='#999999'>用户名已存在</iifont>";
+					}
+					else{
+						document.getElementById("username_msg").innerHTML = "<font color='#999999'></iifont>";
+					}
+				}
+			}
+		};
+		xmlhttp.open("POST","${pageContext.request.contextPath}/ajaxUser",true) ;
+		xmlhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("username="+check_user);
 		
+	}
+	
 	//验证码异步验证
-	function ajax_code(){
+	function ajax_check_code(){
 		var code = document.getElementById("codeid").value;
 		var xmlhttp = createXmlHttpRequest();
 		xmlhttp.onreadystatechange=function() {
@@ -142,7 +166,7 @@
 					var data = xmlhttp.responseText;
 					if(data == "true"){
 						checkCodeResult = "true";
-						document.getElementById("ajax_code").innerHTML = "<font color='#999999'>验证码输入正确</iifont>";
+						document.getElementById("ajax_code").innerHTML = "<font color='#999999'></iifont>";
 					}
 					else{
 						checkCodeResult = "false";
