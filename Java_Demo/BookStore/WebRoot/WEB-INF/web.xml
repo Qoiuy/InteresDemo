@@ -27,10 +27,17 @@
     <servlet-name>ajaxCheckUserServlet</servlet-name>
     <servlet-class>Lilac.web.AjaxCheckUserServlet</servlet-class>
   </servlet>
-
-
-
-
+	<filter>
+	<filter-name>AutoCharSet</filter-name>
+	<filter-class>Lilac.utils.AutoCharSet</filter-class>
+	</filter>
+	
+	
+	
+	<filter-mapping>
+	<filter-name>AutoCharSet</filter-name>
+	<url-pattern>/*</url-pattern>
+	</filter-mapping>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
