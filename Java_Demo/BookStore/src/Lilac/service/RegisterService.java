@@ -49,5 +49,23 @@ public class RegisterService {
 		boolean bool1 = Find_User_By_username("1");
 			System.out.println(bool1);
 	}
+
+	/**
+	 * 登录操作 判断数据库里面是否有该用户
+	 * @author Lilac
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public Boolean Login(String username, String password) {
+		RegisterDao dao = new RegisterDaoImpl();
+		List<Register> list =  dao.Find_user_by_username(username);
+		for (Register register : list) {
+			if(register.getPassword().equals(password)){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

@@ -14,7 +14,7 @@
 	<jsp:include page="menu_search.jsp" />
 
 	<div id="divcontent">
-		<form action="product_list.jsp" method="post">
+		<form action="${pageContext.request.contextPath}/login" method="post">
 			<table width="900px" border="0" cellspacing="0">
 				<tr>
 					<td style="padding:30px"><div style="height:470px">
@@ -32,7 +32,7 @@
 													</tr>
 													<tr>
 														<td style="text-align:center;padding-top:20px;"><font
-															color="#ff0000">${requestScope["register_message"]}</font>
+															color="#ff0000">${msg}</font>
 														</td>
 													</tr>
 													<tr>
@@ -42,14 +42,14 @@
 																<tr>
 																	<td
 																		style="text-align:right; padding-top:5px; width:25%">用户名：</td>
-																	<td style="text-align:left"><input name="username"
-																		type="text" class="textinput" />
+																	<td style="text-align:left"><input name="username" id="username"
+																		type="text" class="textinput" /><span id="username_msg"></span>
 																	</td>
 																</tr>
 																<tr>
 																	<td style="text-align:right; padding-top:5px">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
-																	<td style="text-align:left"><input name="password"
-																		type="password" class="textinput" />
+																	<td style="text-align:left"><input name="password" id="password"
+																		type="password" class="textinput" /><span id="password_msg"></span>
 																	</td>
 																</tr>
 																<tr>
@@ -108,4 +108,50 @@
 
 
 </body>
+<script type="text/javascript">
+//校验
+function formcheck() {
+	//在操作前，将xxx_msg中的信息清空
+	document.getElementById("username").innerHTML="";
+	document.getElementById("password").innerHTML="";
+
+	//验证会员名
+	var usernamevalue = document.getElementById("username").value;
+	if (checkNull(usernamevalue)) {
+		document.getElementById("username_msg").innerHTML = "<font color='#999999'>会员名不能为空</font>";
+		return false;
+	}
+	//密码员名
+	var passwordvalue = document.getElementById("password").value;
+	if (checkNull(passwordvalue)) {
+		document.getElementById("password_msg").innerHTML = "<font color='#999999'>密码不能为空</font>";
+		return false;
+	}
+	//验证长度
+	if(!checkLength(usernamevalue)){
+		document.getElementById("username_msg").innerHTML = "<font color='#999999'>会员名长度必须6位以上</font>";
+		return false;
+	}
+	if(!checkLength(passwordvalue)){
+		document.getElementById("password_msg").innerHTML = "<font color='#999999'>密码长度必须6位以上</font>";
+		return false;
+	}
+	
+	return true;
+};
+
+//验证长度
+function checkLength(value) {
+	var reg = /^(\w){6,}$/;
+	return reg.test(value);
+}
+
+//提取一个非空校验的函数
+function checkNull(value) {
+	//1.声明非空校验的正则
+	var reg = /^\s*$/; //0个或多个空白符
+	return reg.test(value);
+};
+
+</script>
 </html>
