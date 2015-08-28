@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import Lilac.bean.Register;
 import Lilac.bean.User;
 import Lilac.service.RegisterService;
 
@@ -32,6 +31,7 @@ public class LoginServlet extends HttpServlet {
 				 auto_login(request, response, user);
 				 request.getSession().setAttribute("user", user);
 				 response.getWriter().write("登录成功");
+				 response.setHeader("Refresh","3;url=/BookStore/index.jsp");
 			}
 			else{
 				 request.setAttribute("msg", "用户名或密码错误");
