@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import Lilac.bean.Register;
 import Lilac.bean.User;
 import Lilac.service.RegisterService;
 
@@ -24,14 +23,14 @@ public class UserServlet extends BaseServlet {
 	 * @author Lilac
 	 */
 	public String login(HttpServletRequest request, HttpServletResponse response ){
-		User user = new User();
+		User register = new User();
 		try{
-			BeanUtils.populate(user, request.getParameterMap());
+			BeanUtils.populate(register, request.getParameterMap());
 			
-			Boolean bool = new RegisterService().Login(user.getUsername(),user.getPassword());
+			Boolean bool = new RegisterService().Login(register.getUsername(),register.getPassword());
 			if(bool){
-				 auto_login(request, response, user);
-				 request.getSession().setAttribute("user", user);
+				 auto_login(request, response, register);
+				 request.getSession().setAttribute("user", register);
 				 response.getWriter().write("登录成功");
 				 response.setHeader("Refresh","3;url=/BookStore/index.jsp");
 			}
@@ -98,7 +97,7 @@ public class UserServlet extends BaseServlet {
 	 * @author Lilac
 	 */
 	public String register(HttpServletRequest request, HttpServletResponse response )throws ServletException, IOException {
-		Register register = new Register();
+		User register = new User();
 		try {
 			BeanUtils.populate(register, request.getParameterMap());
 		} catch (Exception e) {

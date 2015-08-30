@@ -54,7 +54,7 @@
 						<tr>
 							<td>
 								<form action="modifyUserInfoSuccess.jsp" method="post">
-									<input type="hidden" name="id" value="${user.id}">
+									<input type="hidden" name="id" value="${user. }">
 									<table width="100%" border="0" cellspacing="2" class="upline">
 										<tr>
 											<td style="text-align:right; width:20%">会员邮箱：</td>

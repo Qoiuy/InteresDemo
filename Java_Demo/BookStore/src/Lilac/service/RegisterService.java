@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import Lilac.bean.Register;
+import Lilac.bean.User;
 import Lilac.dao.RegisterDao;
 import Lilac.dao.impl.RegisterDaoImpl;
 
@@ -16,9 +16,9 @@ public class RegisterService {
 	 * @param register
 	 * @return
 	 */
-	public boolean addUser(Register register) {
+	public boolean addUser(User user) {
 		RegisterDao dao = new RegisterDaoImpl();
-		boolean bool = dao.insert_user(register);
+		boolean bool = dao.insert_user(user);
 		return bool;
 	}
 
@@ -30,7 +30,7 @@ public class RegisterService {
 	 */
 	public Boolean Find_User_By_username(String username) {
 		RegisterDao dao = new RegisterDaoImpl();
-		List<Register> list =  dao.Find_user_by_username(username);
+		List<User> list =  dao.Find_user_by_username(username);
 		if(list.size() == 0){
 			return false;
 		}
@@ -59,8 +59,8 @@ public class RegisterService {
 	 */
 	public Boolean Login(String username, String password) {
 		RegisterDao dao = new RegisterDaoImpl();
-		List<Register> list =  dao.Find_user_by_username(username);
-		for (Register register : list) {
+		List<User> list =  dao.Find_user_by_username(username);
+		for (User register : list) {
 			if(register.getPassword().equals(password)){
 				return true;
 			}

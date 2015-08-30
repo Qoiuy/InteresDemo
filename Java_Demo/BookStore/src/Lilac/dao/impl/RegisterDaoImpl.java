@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import Lilac.bean.Register;
+import Lilac.bean.User;
 import Lilac.dao.RegisterDao;
 
 public class RegisterDaoImpl implements RegisterDao {
@@ -18,7 +18,7 @@ public class RegisterDaoImpl implements RegisterDao {
 	 * 想数据库中添加数据
 	 * @author Lilac
 	 */
-	public boolean insert_user(Register r) {
+	public boolean insert_user(User r) {
 		int rows;
 		try {
 			QueryRunner runner = new QueryRunner(new ComboPooledDataSource()); 
@@ -57,11 +57,11 @@ public class RegisterDaoImpl implements RegisterDao {
 	 * 通过用户名查找用户名是否存在
 	 * @author Lilac
 	 */
-	public List<Register> Find_user_by_username(String username) {
-		List<Register> rows = null;
+	public List<User> Find_user_by_username(String username) {
+		List<User> rows = null;
 		try {	
 			QueryRunner runner = new QueryRunner(new ComboPooledDataSource()); 
-			rows = runner.query("select * from user where username=?",new BeanListHandler<Register>(Register.class),username );
+			rows = runner.query("select * from user where username=?",new BeanListHandler<User>(User.class),username );
 			return rows;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,12 +73,12 @@ public class RegisterDaoImpl implements RegisterDao {
 	public void test_Find_user_by_username(){
 		String username = "2221234123";
 		String usernaem_null = "7";
-		List<Register> list = Find_user_by_username(username);
-		for (Register register : list) {
+		List<User> list = Find_user_by_username(username);
+		for (User register : list) {
 			System.out.println("user---->"+ register.getUsername());
 		}
-		List<Register> list_null = Find_user_by_username(usernaem_null);
-		for (Register register : list_null) {
+		List<User> list_null = Find_user_by_username(usernaem_null);
+		for (User register : list_null) {
 			System.out.println("null--->"+register.getUsername());
 		}
 	}
