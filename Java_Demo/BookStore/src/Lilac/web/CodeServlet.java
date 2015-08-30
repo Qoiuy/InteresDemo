@@ -9,38 +9,17 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CodeServlet extends HttpServlet {
 
+@SuppressWarnings("serial")
+public class CodeServlet extends BaseServlet {
 	/**
 	 * 生成验证码
 	 * @author Lilac
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-			Code(request, response);
-	}
-
-	/**
-	 * 
-	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-/**
- * 验证码
- * @author Lilac
- * @param request
- * @param response
- * @throws ServletException
- * @throws IOException
- */
-private void Code(HttpServletRequest request, HttpServletResponse response) throws ServletException,  IOException {
-		
+	public String code(HttpServletRequest request, HttpServletResponse response )throws ServletException, IOException {
 		BufferedImage img = new BufferedImage( 150,  50, BufferedImage.TYPE_3BYTE_BGR);
 		
 		Graphics2D g2d = (Graphics2D) img.getGraphics();
@@ -79,8 +58,24 @@ private void Code(HttpServletRequest request, HttpServletResponse response) thro
 		
 		ImageIO.write(img, "jpg", response.getOutputStream());
 		
-		
-		
+		return null;
 	}
 	
+	
+	/**
+	 * 用ajax对验证码进行校验 
+	 * 当验证码验证成功的时候返回true
+	 * @author Lilac
+	 */
+	public String ajaxCheckCode(HttpServletRequest request, HttpServletResponse response )throws ServletException, IOException	{
+		String Code_client = request.getParameter("code");
+		String Code_service_session = (String) request.getSession().getAttribute("code");
+		if( ! Code_client.equalsIgnoreCase(Code_service_session)){
+			response.getWriter().write("false");
+		}
+		else{
+			response.getWriter().write("true");
+		}
+		return null;
+	}
 }

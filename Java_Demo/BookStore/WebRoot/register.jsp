@@ -18,7 +18,7 @@
 
 	
 	<div id="divcontent">
-		<form action="${pageContext.request.contextPath}/register"
+		<form action="${pageContext.request.contextPath}/user?method=register"
 			method="post"  onsubmit="return checkForm();">
 			<table width="850px" border="0" cellspacing="0">
 				<tr>
@@ -91,7 +91,7 @@
 							<tr>
 								<td style="text-align:right;width:20%;">&nbsp;</td>
 								<td colspan="2" style="width:50%"><img
-									src="${pageContext.request.contextPath}/code" width="180"
+									src="${pageContext.request.contextPath}/code?method=code" width="180"
 									height="30" class="textinput" style="height:30px;" id="img" />&nbsp;&nbsp;
 									<a href="javascript:void(0);" onclick="changeImage()">看不清换一张</a>
 								</td>
@@ -150,7 +150,7 @@
 				}
 			}
 		};
-		xmlhttp.open("POST","${pageContext.request.contextPath}/ajaxUser",true) ;
+		xmlhttp.open("POST","${pageContext.request.contextPath}/user?method=ajaxCheckUser",true) ;
 		xmlhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("username="+check_user);
 		
@@ -176,7 +176,7 @@
 				}
 			}
 		};
-		xmlhttp.open("POST","${pageContext.request.contextPath}/ajaxRegister",true) ;
+		xmlhttp.open("POST","${pageContext.request.contextPath}/code?method=ajaxCheckCode",true) ;
 		xmlhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("code="+code);
 	}
@@ -198,7 +198,7 @@
 		 }
 	//开不清换一张的实现
 	function changeImage() {
-		document.getElementById("img").src = "${pageContext.request.contextPath}/code?time="
+		document.getElementById("img").src = "${pageContext.request.contextPath}/code?method=code&time="
 				+ new Date().getTime();
 	}
 	//校验
