@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"../struts-2.3.dtd">
+	"/WEB-INF/struts-2.3.dtd">
 <struts>
 	<constant name="struts.devMode" value="true"></constant>
 	<package name="p1" extends="struts-default" >
