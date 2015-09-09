@@ -17,6 +17,13 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	private Student student = new Student();
 	StudentService service = new StudentServiceImpl();
 	
+	public String save(){
+			return SUCCESS;
+	}
+	public String update(){
+		return SUCCESS;
+	}
+	
 	public String logout(){
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		session.removeAttribute("user");

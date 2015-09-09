@@ -32,5 +32,9 @@
                 <input type="submit" value="提交"/>
         </div>
 	</form>
+	<h2>接下来做的是拦截器 检测是否登录</h2>
+	<a href="${pageContext.request.contextPath }/save" >save</a>
+	<a href="${pageContext.request.contextPath }/update" >update</a>
+	
 </body>
 </html>

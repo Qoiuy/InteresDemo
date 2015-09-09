@@ -4,13 +4,13 @@
 	"/WEB-INF/struts-2.3.dtd">
 <struts>
 	<constant name="struts.devMode" value="true"></constant>
-	
-	<package name="error" extends="struts-default">
-	<!-- 定义全局函数 错误值 -->
-		<global-results>
-                <result name="error">/WEB-INF/pages/error.jsp</result>
-        </global-results>
-	</package>
+	<!-- 
+	<package name="default"  extends="struts-default">
+		定义拦截器
+		<interceptors>
+			<interceptor name="checkLoginInvocation" class="Lilac.invovation.CheckLoginInvocation"></interceptor>
+		</interceptors>
+	</package> -->
 	
 	<package name="converterrrr" extends="struts-default">
 	<!-- 自动转换 -->
@@ -20,11 +20,28 @@
 		</action>
 	</package>
 	
+	<package name="error" extends="struts-default">
+	<!-- 定义全局函数 错误值 -->
+		<global-results>
+                <result name="error">/WEB-INF/pages/error.jsp</result>
+        </global-results>
+	</package>
+	
 	<package name="student" extends="struts-default" >
+		<action name="save" class="Lilac.action.StudentAction" method="save">
+		<!--  使用拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="checkLoginInvocation"></interceptor-ref>
+		</action>
+		<action name="update" class="Lilac.action.StudentAction" method="update">
+		<!--  使用拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="checkLoginInvocation"></interceptor-ref>
+		</action>
 		<action name="showIndex">
 		<!-- 到主页 -->
 			<result>/WEB-INF/user/index.jsp</result>
-			<result name="input">/WEB-INF/user/index.jsp</result>
+<!-- 			<result name="input">/WEB-INF/user/index.jsp</result> -->
 		</action>
 		<action name="loginUI">
 		<!-- 到登录页面 -->
