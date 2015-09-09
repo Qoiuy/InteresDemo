@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"../struts-2.3.dtd">
+	"/WEB-INF/struts-2.3.dtd">
 <struts>
 	<constant name="struts.devMode" value="true"></constant>
 	
@@ -12,10 +12,19 @@
         </global-results>
 	</package>
 	
+	<package name="converterrrr" extends="struts-default">
+	<!-- 自动转换 -->
+		<action name="converte" class="Lilac.action.ConverterAction" method="converte" >
+			<result>/WEB-INF/user/daysuccess.jsp</result>
+			<result name="input">/WEB-INF/user/index.jsp</result>
+		</action>
+	</package>
+	
 	<package name="student" extends="struts-default" >
 		<action name="showIndex">
 		<!-- 到主页 -->
 			<result>/WEB-INF/user/index.jsp</result>
+			<result name="input">/WEB-INF/user/index.jsp</result>
 		</action>
 		<action name="loginUI">
 		<!-- 到登录页面 -->
@@ -35,11 +44,11 @@
 		<action name="register" class="Lilac.action.StudentAction" method="register">
                 <!-- 注册操作 -->
                 <result>/WEB-INF/user/message.jsp</result>
+                <result name="input">/WEB-INF/user/register.jsp</result>
         </action>
 		<action name="logout" class="Lilac.action.StudentAction" method="logout">
 			<!--  注销操作-->
 			<result type="redirectAction">showIndex</result>
 		</action>
-		
 	</package>
 </struts>

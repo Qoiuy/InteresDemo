@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xwork-core-2.3.15.3.jar\xwork-validator-1.0.3.dtd
+ -->
+<!DOCTYPE validators PUBLIC
+                "-//Apache Struts//XWork Validator 1.0.3//EN"
+                "/WEB-INF/xwork-validator-1.0.3.dtd">
+ <validators>
+ 	<field name="username">
+	 	<field-validator type="requiredstring">
+	 	<message>你没有输入用户名  必须输入知道不～～～～</message>
+	 	</field-validator>
+ 	</field>
+	 	<field name="password">
+	 	<field-validator type="requiredstring">
+	 	<message>你没有输入密码  必须输入知道不～～～～</message>
+	 	</field-validator>
+ 	</field>
+ 	<field name="email">
+	 	<field-validator type="requiredstring">
+	 	<message>你没有输入你的邮箱  必须输入知道不～～～～</message>
+	 	</field-validator>
+ 	</field>
+ 	<field name="telphone">
+	 	<field-validator type="requiredstring">
+	 	<message>你没有输入你的电话  必须输入知道不～～～～</message>
+	 	</field-validator>
+ 	</field>
+ </validators>
